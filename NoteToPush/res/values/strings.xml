@@ -4,5 +4,6 @@
     <string name="app_name">NoteToPush</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="notetopush">Note To Push</string>
 
 </resources>
