@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:background="#808080" >
+        android:background="#005766" >
 
         <Button
             android:id="@+id/noteadd"
@@ -20,12 +20,14 @@
             android:text="Add" />
 
         <TextView
+            android:id="@+id/change"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/noteadd"
             android:gravity="center"
             android:text="@string/notetopush"
-            android:textSize="35sp" />
+            android:textSize="35sp"/>
+             
     </RelativeLayout>
 
     <ScrollView
@@ -33,12 +35,10 @@
         android:layout_height="match_parent"
         android:id="@+id/scroll_view" >
         <LinearLayout
-            android:id="@+id/scrolllinearview"
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" 
-            android:background="#b2ebf4"
             android:orientation="vertical">
-			
         </LinearLayout>
         
     </ScrollView>

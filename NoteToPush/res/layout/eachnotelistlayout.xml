@@ -4,21 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-     <Button
-            android:id="@+id/deletebtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:text="Delete" />
+	<Button
+	    android:id="@+id/deletebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="Delete" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/deletebtn"
-            android:gravity="center"
-            android:text="note"
-            android:textSize="35sp" />
-    
+	<TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/deletebtn"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:id="@+id/notetitle"
+        android:textSize="35sp"/>
 
 </RelativeLayout>
