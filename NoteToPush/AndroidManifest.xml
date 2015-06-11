@@ -12,9 +12,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         <activity
-            android:name=".ControlNoteList"
+            android:name=".ViewNoteEdit"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- <activity 
+            android:name=".ViewNoteEdit"
+            android:label="@string/app_name">
+            
+        </activity> -->
     </application>
 
 </manifest>
