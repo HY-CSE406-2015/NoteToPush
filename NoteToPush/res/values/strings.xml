@@ -9,5 +9,8 @@
 	<string name="img">Image</string>
 	<string name="cancel">Cancel</string>
 	<string name="confirm">Confirm</string>
+	<string name="title">Title</string>
+	<string name="alarm">Alarm</string>
+	<string name="content">Content</string>
 	
 </resources>

@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-        <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -13,7 +13,88 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="800"
-            android:background="#ff6677" >
+            android:background="#ff6677"
+            android:orientation="vertical" >
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="130"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="100" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/title"
+                                android:textSize="10pt" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="500" >
+
+                            <EditText
+                                android:id="@+id/memo_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="input title" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="300" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/alarm"
+                            android:textSize="11pt" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="600"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="11pt"
+                                android:text="@string/content"/>
+                        </LinearLayout>
+                        <LinearLayout 
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:lines="10"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
         <LinearLayout
@@ -23,11 +104,13 @@
             android:background="#000000"
             android:orientation="horizontal" >
 
-            <LinearLayout 
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="200"></LinearLayout>
-            
+                android:layout_weight="200" >
+                
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -40,11 +123,12 @@
                     android:text="@string/cancel" />
             </LinearLayout>
 
-            <LinearLayout 
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="200"></LinearLayout>
-            
+                android:layout_weight="200" >
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -56,11 +140,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/confirm" />
             </LinearLayout>
-            
-            <LinearLayout 
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="200"></LinearLayout>
+                android:layout_weight="200" >
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

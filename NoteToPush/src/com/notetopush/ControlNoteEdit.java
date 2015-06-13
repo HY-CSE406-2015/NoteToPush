@@ -97,10 +97,10 @@ public class ControlNoteEdit extends Activity implements OnClickListener{
     		}
     		else if(position==1){
     			v = mInflater.inflate(R.layout.edit_todo, null);
-    			v.findViewById(R.id.btn_click_2).setOnClickListener(mPagerListener);
+    			//v.findViewById(R.id.btn_click_2).setOnClickListener(mPagerListener);
     		}else{
     			v = mInflater.inflate(R.layout.edit_img, null);
-    			v.findViewById(R.id.btn_click_3).setOnClickListener(mPagerListener);
+    			//v.findViewById(R.id.btn_click_3).setOnClickListener(mPagerListener);
     		}
     		
     		((ViewPager)pager).addView(v, 0);
