@@ -1,11 +1,10 @@
 package com.notetopush;
 
-import java.util.Currency;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,9 +23,23 @@ public class ControlNoteList extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ctrnoti.setTitle("제목이다", System.currentTimeMillis(), ControlNoteList.this);
-				ctrnoti.setMemoContent("내용!!");
-				ctrnoti.settingNotification(ControlNoteList.this);
+				//ctrnoti.setMemoContent("내용!!");
+				BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.test_img);
+				Bitmap img = drawable.getBitmap();
+				ctrnoti.setImgContent(img, "내용ㅇㅇㅇㅇ");
 				
+				ctrnoti.settingNotification(1);
+				
+			}
+		});
+		
+		Button btn2 = (Button)findViewById(R.id.button2);
+		btn2.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ctrnoti.deletePreviousNotification(1, ControlNoteList.this);
 			}
 		});
 	

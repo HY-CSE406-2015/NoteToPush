@@ -25,30 +25,46 @@ public class ControlNotification {
 
 	public void setTitle(String title, long time,Context cnt){
         nm = (NotificationManager)cnt.getSystemService(Context.NOTIFICATION_SERVICE);
+        
+        Intent intent = new Intent(cnt, ControlNoteContent.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent content = PendingIntent.getActivity(cnt, 0, intent, 0);
+    
 		notiBuilder = new Notification.Builder(cnt);
 		notiBuilder.setTicker(title)
 		.setContentTitle(title)
-		.setContentText(title+"내용")
 		.setWhen(System.currentTimeMillis())    // 확인위해 현재시간으로
 		.setSmallIcon(R.drawable.ic_launcher);
+		notiBuilder.setContentIntent(content);
+		
+		
 	}
 
 	public void setMemoContent(String text){
 		notiBuilder.setContentText(text);
-	}
-
-	public void settingNotification(Context cnt){
-		Intent intent = new Intent(cnt, ControlNoteList.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		PendingIntent content = PendingIntent.getActivity(cnt, 0, intent, 0);
-		notiBuilder.setContentIntent(content);
 		noti = notiBuilder.build();
-		nm.notify(1,noti);
+		
 	}
-	public void setToDoContent(String[] contents){}
-	public void setImgContent(Bitmap img, String content){}
-	public void deletePreviousNotification(int noti_id){}
 
+	public void settingNotification(int noti_id){
+		noti.flags = Notification.FLAG_NO_CLEAR;
+		nm.notify(noti_id,noti);
+	}
+	
+	public void setToDoContent(String[] contents){}
+	public void setImgContent(Bitmap img, String content){
+		notiBuilder.setContentText(content);
+		noti = new Notification.BigPictureStyle(notiBuilder).bigPicture(img)
+				.setBigContentTitle("큰그림타이틀")
+				.setSummaryText("큰그림내용")
+				.build();
+	}
+	//Delete noti
+	public void deletePreviousNotification(int noti_id,Context cnt){
+		nm = (NotificationManager)cnt.getSystemService(Context.NOTIFICATION_SERVICE);
+		nm.cancel(noti_id);
+	}
 	
 
+	
 }
