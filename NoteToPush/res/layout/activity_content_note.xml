@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.notetopush.ControlNoteList" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:background="@android:color/darker_gray"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/content_note_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temp_text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/content_note_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="75" >
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:background="@android:color/darker_gray"
+        android:gravity="center" >
+
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/content_note_delete"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="@string/delete"
+            flatui:fl_blockButtonEffectHeight="3dp"
+            flatui:fl_theme="@array/candy" />
+        
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/content_note_modify"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:text="@string/modify"
+            flatui:fl_blockButtonEffectHeight="3dp"
+            flatui:fl_theme="@array/sky" />
+
+    </LinearLayout>
+
+</LinearLayout>
