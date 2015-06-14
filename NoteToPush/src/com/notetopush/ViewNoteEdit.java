@@ -23,104 +23,50 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class ViewNoteEdit extends Activity implements OnClickListener{
+public class ViewNoteEdit{
+
+	private Context context;
+	private int type;
+	private View view;
+	private ViewListener listener;
 
 	private ViewPager mPager;
-	private Button btn_memo;
-	private Button btn_todo;
-	private Button btn_img;
+	//private Button btn_memo;
+	//private Button btn_todo;
+	//private Button btn_img;
 	public EditText memo_title;
 	public EditText todo_title;
 	public EditText img_title;
 	public EditText memo_content;
-	private ImageView _image;
+	public ImageView _image;
 
-	private static final String TEMP_PHOTO_FILE = "temp.jpg";       // 임시 저장파일
-	private static final int REQ_CODE_PICK_IMAGE = 0;
+	public ViewNoteEdit(Context context){
+		this.context = context;
+		//this.type = note_type;
+		this.view = View.inflate(context, R.layout.activity_edit_note, null);
+		initPager();
+		setOnClick();
+	}
+	
+	public View getview() {
+		return view;
+	}
 
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_edit_note);
-
-		setLayout();
-
-
-		memo_title = (EditText) findViewById(R.id.memo_title);
-		todo_title = (EditText) findViewById(R.id.todo_title);
-		img_title = (EditText) findViewById(R.id.img_title);
-		mPager = (ViewPager)findViewById(R.id.pager);
+	public void setListener(ViewListener listener){
+		this.listener = listener;
+	}
+	
+	public View findViewById(int id){
+		return view.findViewById(id);
+	}
+	
+	public void initPager(){
+		mPager = (ViewPager) findViewById (R.id.pager);
 		mPager.setAdapter(new PagerAdapterClass(getApplicationContext()));
-
 	}
-
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_memo:
-			setCurrentInflateItem(0);
-			break;
-		case R.id.btn_todo:
-			setCurrentInflateItem(1);
-			break;
-		case R.id.btn_img:
-			setCurrentInflateItem(2);
-			break;
-
-		}
-	}
-
-	/** 임시 저장 파일의 경로를 반환 */
-	private Uri getTempUri() {
-		return Uri.fromFile(getTempFile());
-	}
-
-	/** 외장메모리에 임시 이미지 파일을 생성하여 그 파일의 경로를 반환  */
-	private File getTempFile() {
-		if (isSDCARDMOUNTED()) {
-			File f = new File(Environment.getExternalStorageDirectory(), // 외장메모리 경로
-					TEMP_PHOTO_FILE);
-			try {
-				f.createNewFile();      // 외장메모리에 temp.jpg 파일 생성
-			} catch (IOException e) {
-			}
-
-			return f;
-		} else
-			return null;
-	}
-
-	/** SD카드가 마운트 되어 있는지 확인 */
-	private boolean isSDCARDMOUNTED() {
-		String status = Environment.getExternalStorageState();
-		if (status.equals(Environment.MEDIA_MOUNTED))
-			return true;
-
-		return false;
-	}
-
-	/** 다시 액티비티로 복귀하였을때 이미지를 셋팅 */
-	protected void onActivityResult(int requestCode, int resultCode,
-			Intent imageData) {
-		super.onActivityResult(requestCode, resultCode, imageData);
-
-		switch (requestCode) {
-		case REQ_CODE_PICK_IMAGE:
-			if (resultCode == RESULT_OK) {
-				if (imageData != null) {
-					String filePath = Environment.getExternalStorageDirectory()
-							+ "/temp.jpg";
-
-					System.out.println("path" + filePath); // logCat으로 경로확인.
-
-					Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-					// temp.jpg파일을 Bitmap으로 디코딩한다.
-
-					_image = (ImageView) findViewById(R.id.img_content);
-					_image.setImageBitmap(selectedImage); 
-					// temp.jpg파일을 이미지뷰에 씌운다.
-				}
-			}
-			break;
-		}
+	
+	private Context getApplicationContext() {
+		return view.getContext();
 	}
 
 	private void setCurrentInflateItem(int type){
@@ -133,15 +79,42 @@ public class ViewNoteEdit extends Activity implements OnClickListener{
 		}
 	}
 
-	private void setLayout(){
-		btn_memo = (Button) findViewById(R.id.btn_memo);
-		btn_todo = (Button) findViewById(R.id.btn_todo);
-		btn_img = (Button) findViewById(R.id.btn_img);
+	private void setOnClick(){
+		View.OnClickListener click_listener = new View.OnClickListener() {
+			public void onClick(View v) {
+				if(listener!=null){
+					int id = v.getId();
+					if(id == R.id.btn_cancel){
+						listener.cancelAction();
+					} else if(id == R.id.btn_confirm){
+						listener.confirmAction();
+					} else if(id == R.id.btn_chose){
+						listener.selectImgAction();
+					} else if(id == R.id.btn_memo){
+						setCurrentInflateItem(0);
+					} else if(id == R.id.btn_todo){
+						setCurrentInflateItem(1);
+					} else if(id == R.id.btn_img){
+						setCurrentInflateItem(2);
+					}
+				}
+			}
+		};
+		setViewElement(click_listener);
+	}
+	
+	private void setViewElement(View.OnClickListener click_listener){
+		Button btn_memo = (Button) findViewById(R.id.btn_memo);
+		Button btn_todo = (Button) findViewById(R.id.btn_todo);
+		Button btn_img = (Button) findViewById(R.id.btn_img);
+		Button btn_cancel = (Button)findViewById(R.id.btn_cancel);
+		Button btn_confirm = (Button)findViewById(R.id.btn_confirm);
 
-		btn_memo.setOnClickListener(this);
-		btn_todo.setOnClickListener(this);
-		btn_img.setOnClickListener(this);
-		//bt_chose.setOnClickListener(this);
+		btn_memo.setOnClickListener(click_listener);
+		btn_todo.setOnClickListener(click_listener);
+		btn_img.setOnClickListener(click_listener);
+		btn_cancel.setOnClickListener(click_listener);
+		btn_confirm.setOnClickListener(click_listener);
 	}
 
 	private View.OnClickListener mPagerListener = new View.OnClickListener() {
@@ -150,25 +123,20 @@ public class ViewNoteEdit extends Activity implements OnClickListener{
 			//			String text = ((Button)v).getText().toString();
 			//			Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 			switch (v.getId()){
-			case R.id.bt_chose:
-				Intent intent = new Intent(
-						Intent.ACTION_GET_CONTENT,      // 또는 ACTION_PICK
-						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				intent.setType("image/*");              // 모든 이미지
-				intent.putExtra("crop", "true");        // Crop기능 활성화
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, getTempUri());     // 임시파일 생성
-				intent.putExtra("outputFormat",         // 포맷방식
-						Bitmap.CompressFormat.JPEG.toString());
-
-				startActivityForResult(intent, REQ_CODE_PICK_IMAGE);
+			case R.id.btn_chose:
+				listener.choseImage();
 				// REQ_CODE_PICK_IMAGE == requestCode
 				break;
 			}
 		}
 	};
 
+	
+
+	
+
 	/**
-	 * PagerAdapter 
+	 * PagerAdapter 노트 타입 변환 전환 클래스
 	 */
 	private class PagerAdapterClass extends PagerAdapter{
 
@@ -189,15 +157,12 @@ public class ViewNoteEdit extends Activity implements OnClickListener{
 			View v = null;
 			if(position==0){
 				v = mInflater.inflate(R.layout.edit_memo, null);
-				//v.findViewById(R.id.).setOnClickListener(mPagerListener);
 			}
 			else if(position==1){
 				v = mInflater.inflate(R.layout.edit_todo, null);
-				//v.findViewById(R.id.btn_click_2).setOnClickListener(mPagerListener);
 			}else{
 				v = mInflater.inflate(R.layout.edit_img, null);
-				//v.findViewById(R.id.btn_click_3).setOnClickListener(mPagerListener);
-				v.findViewById(R.id.bt_chose).setOnClickListener(mPagerListener);
+				v.findViewById(R.id.btn_chose).setOnClickListener(mPagerListener);
 			}
 
 			((ViewPager)pager).addView(v, 0);
@@ -219,5 +184,15 @@ public class ViewNoteEdit extends Activity implements OnClickListener{
 		@Override public Parcelable saveState() { return null; }
 		@Override public void startUpdate(View arg0) {}
 		@Override public void finishUpdate(View arg0) {}
+
+
 	}
+
+	interface ViewListener{
+		public void cancelAction();
+		public void choseImage();
+		public void confirmAction();
+		public void selectImgAction();
+	}
+
 }
