@@ -17,6 +17,7 @@ public class ControlNoteList extends Activity {
 	TextView noteTitle;
 	String title;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,15 +47,7 @@ public class ControlNoteList extends Activity {
 					}
 				});
 				
-				if(container.getChildCount()%2 == 0){
-					eachNoteList.setBackgroundColor(Color.GRAY);
-					noteTitle.setText(title);
-				}
-				else{
-					eachNoteList.setBackgroundColor(Color.WHITE);
-					noteTitle.setText(title);
-				}
-
+				noteTitle.setText(title);
 				container.addView(eachNoteList);
 			}
 		});
