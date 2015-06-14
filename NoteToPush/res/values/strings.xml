@@ -12,5 +12,7 @@
 	<string name="title">Title</string>
 	<string name="alarm">Alarm</string>
 	<string name="content">Content</string>
+	<string name="selectimg">Select Image</string>
+	<string name="chose">Chose</string>
 	
 </resources>
