@@ -1,4 +1,4 @@
-
+package com.example.notetopush;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class Note {
 
@@ -16,7 +18,8 @@ public class Note {
 	final static int TODO_TYPE = 1;
 	final static int IMG_TYPE = 2;
 
-	// DB占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
+	private Note sub_note;
+
 	private static final String dbName = "notetopush.db";
 	private static final String note = "NOTE";
 	private static final String memo_note =	 "MEMO_NOTE";
@@ -36,10 +39,36 @@ public class Note {
 
 	private Context context;
 
+	private ArrayList<ToDoNote> todos;
+
+	protected Note(){}
+
 	public Note(Context context) {
 		this.context = context;
 		this.helper = new MyOpenHelper(context, dbName, null, dbVersion);
 		mDB = helper.getWritableDatabase();
+	}
+	public Note(Context context, int note_id){
+		this.context = context;
+		this.helper = new MyOpenHelper(context, dbName, null, dbVersion);
+
+		selectNote(note_id);
+		switch(this.note_type){
+			case MEMO_TYPE:
+				this.sub_note = new MemoNote(this.context,this.note_id);
+				break;
+
+			case TODO_TYPE:
+				todos = new ArrayList<ToDoNote>();
+				for(int todo_loop = 0; todo_loop < todoSize(); todo_loop++)
+					todos.add(new ToDoNote(this.context, this.note_id,todo_loop));
+				break;
+
+			case IMG_TYPE:
+				this.sub_note = new ImageNote(this.context, this.note_id);
+				break;
+			default:
+		}
 	}
 
 	private class MyOpenHelper extends SQLiteOpenHelper {
@@ -120,7 +149,7 @@ public class Note {
 		Cursor c = mDB.query("NOTE", null, null, null, null, null, null);
 		note_id = c.getCount() + 1;
 
-		note.put("note_id", this.getId()); //note_id �젙蹂대�� MemoNote, ToDoNote, ImageNote�뿉 �꽆寃⑥＜湲� �쐞�빐 put �빐以��떎.
+		note.put("note_id", this.getId()); //note_id 정보를 MemoNote, ToDoNote, ImageNote에 넘겨주기 위해 put 해준다.
 
 		ContentValues tmp_note = new ContentValues();
 		tmp_note.put("note_id", this.note_id);
@@ -165,35 +194,29 @@ public class Note {
 
 		else if(note.getAsInteger("type") == TODO_TYPE) {
 			ToDoNote todo_note = new ToDoNote(this.context);
-			todo_note.updateToDoList(note);
+			todo_note.updateToDoList(note, note_id);
 		}
 
 		else if(note.getAsInteger("type") == IMG_TYPE) {
 			ImageNote image_note = new ImageNote(this.context);
-			image_note.updateImageNote(note);
+			image_note.updateImageNote(note, note_id);
 		}
 	}
 
-	public void selectNote() {
-		mDB = helper.getReadableDatabase(); // db占쏙옙체占쏙옙 占쏙옙占승댐옙. 占싻깍옙 占쏙옙占쏙옙
-		Cursor c = mDB.query("note", null, null, null, null, null, null);
+	public void selectNote(int note_id) {
+		mDB = helper.getReadableDatabase();
+		Cursor c = mDB.rawQuery("SELECT * FROM NOTE WHERE NOTE_ID = " + note_id, null);
 
+		this.note_id = c.getInt(c.getColumnIndex("note_id"));
+		this.note_type = c.getInt(c.getColumnIndex("type"));
+		this.note_title = c.getString(c.getColumnIndex("title"));
+		if(c.isNull(c.getColumnIndex("alarm"))) this.note_alarm = null;
+		else this.note_alarm = c.getLong(c.getColumnIndex("alarm"));
 
-        /*
-         * 占쏙옙 占쏙옙占쏙옙占� select * from student 占쏙옙 占싫댐옙. Cursor占쏙옙 DB占쏙옙占쏙옙占� 占쏙옙占쏙옙占싼댐옙. public Cursor
-         * query (String table, String[] columns, String selection, String[]
-         * selectionArgs, String groupBy, String having, String orderBy)
-         */
+		this.note_write_time = c.getLong(c.getColumnIndex("write_time"));
 
-		while (c.moveToNext()) {
-
-			int _id = c.getInt(c.getColumnIndex("_id"));
-			String name = c.getString(c.getColumnIndex("name"));
-			int age = c.getInt(c.getColumnIndex("age"));
-			String address = c.getString(c.getColumnIndex("address"));
-			Log.i("db", "id: " + _id + ", name : " + name + ", age : " + age
-					+ ", address : " + address);
-		}
+		if(c.isNull(c.getColumnIndex("noti_id"))) this.note_notification_id =null;
+		else this.note_notification_id = c.getInt(c.getColumnIndex("noti_id"));
 	}
 
 	public void deleteNote() {

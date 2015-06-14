@@ -5,16 +5,31 @@
     android:orientation="vertical" >
     
     <Button
-        android:id="@+id/btn_insert"
+        android:id="@+id/insert_img"
         android:onClick="onClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="insert"/>
+        android:text="insert_img"/>
     
     <Button
-    	android:id="@+id/btn_check"
+    	android:id="@+id/insert_todo"
         android:onClick="onClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="check"/>
+        android:text="insert_todo"/>
+
+    <Button
+        android:id="@+id/drop_all"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dropAll"/>
+
+    <Button
+        android:id="@+id/update_note"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update_note"/>
+
 </LinearLayout>
