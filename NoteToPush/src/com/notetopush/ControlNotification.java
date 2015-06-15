@@ -2,11 +2,13 @@ package com.notetopush;
 
 import android.app.Notification;
 import android.app.Notification.Builder;
+import android.app.Notification.InboxStyle;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 public class ControlNotification {
 
@@ -33,7 +35,7 @@ public class ControlNotification {
 		notiBuilder = new Notification.Builder(cnt);
 		notiBuilder.setTicker(title)
 		.setContentTitle(title)
-		.setWhen(System.currentTimeMillis())    // 확인위해 현재시간으로
+		.setWhen(time) 
 		.setSmallIcon(R.drawable.ic_launcher);
 		notiBuilder.setContentIntent(content);
 		
@@ -51,7 +53,22 @@ public class ControlNotification {
 		nm.notify(noti_id,noti);
 	}
 	
-	public void setToDoContent(String[] contents){}
+	public void setToDoContent(String[] contents){
+//		InboxStyle ibs = new InboxStyle(notiBuilder);
+
+		Notification.InboxStyle ibs = new Notification.InboxStyle(notiBuilder);
+//		Log.i("noti","!!!");
+//		Log.i("noti",contents[0]);
+//		Log.i("noti",contents[1]);
+//		Log.i("noti",contents[2]);
+		Log.i("noti",""+contents.length);
+		for(int i = 0; i<contents.length; i++){
+			ibs.addLine(contents[i]);
+			Log.i("noti",contents[i]);
+		}
+		noti = ibs.build();
+	}
+
 	public void setImgContent(Bitmap img, String content){
 		notiBuilder.setContentText(content);
 		noti = new Notification.BigPictureStyle(notiBuilder).bigPicture(img)
@@ -64,6 +81,7 @@ public class ControlNotification {
 		nm = (NotificationManager)cnt.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(noti_id);
 	}
+	
 	
 
 	
