@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
-        android:background="@android:color/darker_gray"
+        android:background="@color/grass_primary"
         android:gravity="center" >
 
         <TextView
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="15"
-        android:background="@android:color/darker_gray"
+        android:background="@drawable/shape_border_upper"
         android:gravity="center" >
 
         <com.cengalabs.flatui.views.FlatButton

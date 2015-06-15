@@ -9,6 +9,7 @@
     <string name="delete">Delete</string>
     <string name="modify">Modify</string>
     <string name="month">,</string>
+    <string name="notetopush">Note To Push</string>
     <string name="temp_text">Temporary text</string>
     <string name="time">:</string>
     <string name="year">,</string>

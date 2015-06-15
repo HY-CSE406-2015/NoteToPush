@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -115,11 +114,16 @@ public class ViewNoteContent {
 			for(int todo_loop = 0; todo_loop<str_list.size(); todo_loop++){
 				FlatCheckBox c_box = new FlatCheckBox(context);
 				c_box.setId(todo_loop);
-				c_box.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+				LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+
+				c_box.setLayoutParams(param);
 				c_box.setText(str_list.get(todo_loop));
 				c_box.setGravity(0x00800003);
 				c_box.setChecked(able_list.get(todo_loop));
 				todoSetter(c_box,able_list.get(todo_loop));
+				if(!(todo_loop==0)){
+					c_box.setBackgroundResource(R.drawable.shape_border_upper);
+				}
 				c_box.setOnClickListener(new View.OnClickListener(){
 					public void onClick(View v) {
 						if(listener != null){

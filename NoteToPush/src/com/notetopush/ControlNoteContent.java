@@ -12,15 +12,18 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 public class ControlNoteContent extends Activity implements ViewNoteContent.ViewListener {
-	public static final String CONTROL_NOTE_ID = "com.notetopush.ControlNoteContent.CONTROL_NOTE_ID"; 
+	public static final String CONTROL_NOTE_ID = "com.notetopush.ControlNoteContent.CONTROL_NOTE_ID";
+	public static final String CONTROL_NOTE_TYPE = "com.notetopush.ControlNoteContent.CONTROL_NOTE_TYPE";
 	private ViewNoteContent view;
 	private Note note;
 	private int note_id;
+	private int note_type;
 	private boolean is_created;
 
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		this.note_id = getIntent().getIntExtra(CONTROL_NOTE_ID, -1);
+		this.note_type = getIntent().getIntExtra(CONTROL_NOTE_TYPE, -1);
 		getNoteContent(this.note_id);
 		this.view = new ViewNoteContent(this, this.note.getType());
 		this.view.setListener(this);
@@ -35,6 +38,7 @@ public class ControlNoteContent extends Activity implements ViewNoteContent.View
 			setView();
 			setContentView(this.view.getView());
 		}
+		is_created = true;
 	}
 	private void setView(){
 		this.view.setTitle(this.note.getTitle());
@@ -57,25 +61,20 @@ public class ControlNoteContent extends Activity implements ViewNoteContent.View
 		    date[5] = (new SimpleDateFormat("aa",locale)).format(d);
 		}
 		
-		int type = this.note.getType();
+		int type = this.note_type;
 		switch(type){
 		case Note.MEMO_TYPE:
-			String text = ((MemoNote)this.note.getSubNote()).getContent();
+			String text = ((MemoNote)this.note).getContent();
 			this.view.setMemo(text, date);
 			break;
 		case Note.TODO_TYPE:
-			ArrayList<String> str_list = new ArrayList<String>();
-			ArrayList<Boolean> able_list = new ArrayList<Boolean>();
-			for(int todo_loop=0; todo_loop < this.note.todoSize(); todo_loop++){
-				str_list.add(this.note.getToDo(todo_loop).getContent());
-				able_list.add(this.note.getToDo(todo_loop).isChecked());
-			}
+			ArrayList<String> str_list = ((ToDoNote)this.note).getContents();
+			ArrayList<Boolean> able_list = ((ToDoNote)this.note).getChecks();
 			this.view.setToDo(str_list, able_list, date);
 			break;
 		case Note.IMG_TYPE:
-			ImageNote sub = ((ImageNote)this.note.getSubNote());
-			sub.setImage(BitmapFactory.decodeResource(this.getResources(),R.drawable.test_big_img));
-			this.view.setImage(sub.getImage(), sub.getContent(), date);
+			ImageNote sub = ((ImageNote)this.note);
+			this.view.setImage(sub.getImage(), sub.getSubContent(), date);
 			break;
 		default:
 			try {
@@ -86,7 +85,23 @@ public class ControlNoteContent extends Activity implements ViewNoteContent.View
 		}
 	}
 	public void getNoteContent(int note_id){
-		this.note = new Note(note_id);
+		switch(this.note_type){
+		case Note.MEMO_TYPE:
+			this.note = new MemoNote(this,note_id);
+			break;
+		case Note.IMG_TYPE:
+			this.note = new ImageNote(this,note_id);
+			break;
+		case Note.TODO_TYPE:
+			this.note = new ToDoNote(this, note_id);
+			break;
+		default:
+			try{
+				throw new Exception("com.notetopush.NoteTypeException: Exception occured missing note type match");
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void deleteNoteAction() {
@@ -101,7 +116,7 @@ public class ControlNoteContent extends Activity implements ViewNoteContent.View
 	}
 
 	public void todoCheckAction(int order, boolean checked) {
-		this.note.getToDo(order).setChecked(checked);
+		((ToDoNote)this.note).setChecked(order,checked);
 	}
 
 }
