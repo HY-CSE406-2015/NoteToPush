@@ -219,8 +219,21 @@ public class Note {
 		else this.note_notification_id = c.getInt(c.getColumnIndex("noti_id"));
 	}
 
-	public void deleteNote() {
+	public void deleteNote(int note_id) {
+//		mDB = helper.getWritableDatabase();
+		selectNote(note_id);
+		mDB.delete(note, "NOTE_ID = " + note_id, null);
 
+		if(this.note_type == MEMO_TYPE) {
+			mDB.delete(memo_note, "NOTE_ID = " + note_id, null);
+		}
+
+		else if(this.note_type == TODO_TYPE) {
+			mDB.delete(todo_note, "NOTE_ID = " + note_id, null);
+
+		} else if (note_type == IMG_TYPE) {
+			mDB.delete(img_note, "NOTE_ID = " + note_id, null);
+		}
 	}
 
 	public void dropAll() {
