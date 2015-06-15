@@ -31,8 +31,11 @@ public class ControlNoteList extends Activity implements ViewNoteList.ViewListen
 	}
 	protected void onResume(){
 		super.onResume();
+		Log.d("NoteList", "Do Resume");
 		if(is_created){
+			Log.d("NoteList", "Do Redraw");
 			this.note_list = new NoteList(this);
+			view.clearNoteContainer();
 			setView();
 			setContentView(this.view.getView());
 		}
@@ -43,21 +46,22 @@ public class ControlNoteList extends Activity implements ViewNoteList.ViewListen
 		Log.i("CtlNL",""+this.note_list.getSize());
 		for(int list_loop=0; list_loop<this.note_list.getSize();list_loop++){
 			Log.i("CtlNL",""+list_loop);
-			view.addNoteContainer(note_list.getNoteTitles(list_loop), note_list.getNoteId(list_loop));
+			view.addNoteContainer(note_list.getNoteTitles(list_loop), note_list.getNoteId(list_loop), note_list.getNoteType(list_loop));
 		}
 	}
 	public void addButtonAction() {
 		Intent i = new Intent(ControlNoteList.this, ControlNoteEdit.class);
 		startActivity(i);
 	}
-	public void noteClickAction(int note_id){
-		Intent i = new Intent(ControlNoteList.this, ControlNoteEdit.class);
+	public void noteClickAction(int note_id, int note_type){
+		Intent i = new Intent(ControlNoteList.this, ControlNoteContent.class);
 		i.putExtra(ControlNoteContent.CONTROL_NOTE_ID, note_id);
+		i.putExtra(ControlNoteContent.CONTROL_NOTE_TYPE, note_type);
 		startActivity(i);
 	}
-	public void deleteButtonAction(int note_id, View note){
+	public void deleteButtonAction(int note_id, int note_type, View note){
 		//삭제 확인 팝업 추가
-		note_list.deleteNote(note_id);
+		note_list.deleteNote(note_id, note_type);
 		view.deleteNote(note);
 	}
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 
 public class ToDoNote extends Note {
@@ -21,7 +22,7 @@ public class ToDoNote extends Note {
 		selectNote(note_id);
 	}
 	public void setNote(String title,Long alarm, long write_time, ArrayList<String> contents, ArrayList<Boolean> checks) {
-		super.setNote(title, Note.MEMO_TYPE, alarm, write_time);
+		super.setNote(title, Note.TODO_TYPE, alarm, write_time);
 		this.note_contents = contents;
 		this.is_checks = checks;
 	}
@@ -55,6 +56,7 @@ public class ToDoNote extends Note {
 			todo_content.put("todo_order", insert_loop);
 			todo_content.put("content", this.note_contents.get(insert_loop));
 			todo_content.put("is_check", (this.is_checks.get(insert_loop))?1:0);
+			Log.d("ToDo insert", "Id: "+this.note_id + "Order: "+insert_loop);
 			mDB.insert("TODO_NOTE", null, todo_content);
 		}
 		mDB.close();
@@ -79,6 +81,7 @@ public class ToDoNote extends Note {
 	}
 	public void setChecked(int order, boolean checked) {
 		this.is_checks.set(order, checked);
+		getWritableDB();
 		ContentValues todo_content = new ContentValues();
 		todo_content.put("note_id", this.note_id);
 		todo_content.put("todo_order", order);

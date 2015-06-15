@@ -143,7 +143,7 @@ public class Note {
 	}
 	private void calcNewId(){
 		mDB = helper.getReadableDatabase();
-		Cursor c = mDB.query("NOTE", null, null, null, null, null, "desc");
+		Cursor c = mDB.query("NOTE", null, null, null, null, null, note_id+" DESC");
 		
 		c.moveToFirst();
 		if (c != null && c.getCount() != 0){

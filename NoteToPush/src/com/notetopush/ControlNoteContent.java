@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 
 public class ControlNoteContent extends Activity implements ViewNoteContent.ViewListener {
 	public static final String CONTROL_NOTE_ID = "com.notetopush.ControlNoteContent.CONTROL_NOTE_ID";
@@ -62,6 +63,7 @@ public class ControlNoteContent extends Activity implements ViewNoteContent.View
 		}
 		
 		int type = this.note_type;
+		Log.d("NoteType", ""+type);
 		switch(type){
 		case Note.MEMO_TYPE:
 			String text = ((MemoNote)this.note).getContent();
@@ -70,6 +72,7 @@ public class ControlNoteContent extends Activity implements ViewNoteContent.View
 		case Note.TODO_TYPE:
 			ArrayList<String> str_list = ((ToDoNote)this.note).getContents();
 			ArrayList<Boolean> able_list = ((ToDoNote)this.note).getChecks();
+			Log.d("ToDo draw", "Number of elem is "+str_list.size());
 			this.view.setToDo(str_list, able_list, date);
 			break;
 		case Note.IMG_TYPE:
