@@ -1,27 +1,14 @@
 package com.notetopush;
 
-import java.io.File;
-import java.io.IOException;
-
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
 import android.os.Parcelable;
-import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class ViewNoteEdit{
 
@@ -31,9 +18,6 @@ public class ViewNoteEdit{
 	private ViewListener listener;
 
 	private ViewPager mPager;
-	//private Button btn_memo;
-	//private Button btn_todo;
-	//private Button btn_img;
 	public EditText memo_title;
 	public EditText todo_title;
 	public EditText img_title;
@@ -89,7 +73,7 @@ public class ViewNoteEdit{
 					} else if(id == R.id.btn_confirm){
 						listener.confirmAction();
 					} else if(id == R.id.btn_chose){
-						listener.selectImgAction();
+						listener.choseImageAction();
 					} else if(id == R.id.btn_memo){
 						setCurrentInflateItem(0);
 					} else if(id == R.id.btn_todo){
@@ -120,20 +104,13 @@ public class ViewNoteEdit{
 	private View.OnClickListener mPagerListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			//			String text = ((Button)v).getText().toString();
-			//			Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 			switch (v.getId()){
 			case R.id.btn_chose:
-				listener.choseImage();
-				// REQ_CODE_PICK_IMAGE == requestCode
+				listener.choseImageAction();
 				break;
 			}
 		}
 	};
-
-	
-
-	
 
 	/**
 	 * PagerAdapter 노트 타입 변환 전환 클래스
@@ -188,11 +165,11 @@ public class ViewNoteEdit{
 
 	}
 
+	//뷰 리스너 함수
 	interface ViewListener{
 		public void cancelAction();
-		public void choseImage();
+		public void choseImageAction();
 		public void confirmAction();
-		public void selectImgAction();
 	}
 
 }

@@ -17,13 +17,11 @@ public class ControlNoteEdit extends Activity implements ViewNoteEdit.ViewListen
 
 	private ViewNoteEdit view;
 	private Note note;
-	
-	//이미지 호출시 사용할 변
-	private static final String TEMP_PHOTO_FILE = "temp.jpg";       // 임시 저장파일
-	private static final int REQ_CODE_PICK_IMAGE = 0;
 
+	//이미지 호출시 사용할 변수
+	private static final String TEMP_PHOTO_FILE = "temp.jpg";       // 이미지 임시 저장파일
+	private static final int REQ_CODE_PICK_IMAGE = 0;				// REQ_CODE_PICK_IMAGE == requestCode
 
-	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		this.view = new ViewNoteEdit(this);
@@ -35,39 +33,38 @@ public class ControlNoteEdit extends Activity implements ViewNoteEdit.ViewListen
 	private void setView(){
 		
 	}
-	
+
 	public void getNoteContent(){
-		
+
 	}
 
 	public void cancelAction(){
-		
+
 	}
-	
+
 	public void confirmAction(){
-		
+
 	}
 
 	public void selectImgAction() {
 		
-		
+
 	}
 
-	@Override
-	public void choseImage() {
+	//image 선택 호출
+	public void choseImageAction() {
 		Intent intent = new Intent(
 				Intent.ACTION_GET_CONTENT,      // 또는 ACTION_PICK
 				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		intent.setType("image/*");              // 모든 이미지
 		intent.putExtra("crop", "true");        // Crop기능 활성화
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, getTempUri());     // 임시파일 생성
-		intent.putExtra("outputFormat",         // 포맷방식
-				Bitmap.CompressFormat.JPEG.toString());
+		intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString()); // 포맷방식
 
 		startActivityForResult(intent, REQ_CODE_PICK_IMAGE);
-		
+
 	}
-	
+
 	/** 임시 저장 파일의 경로를 반환 */
 	private Uri getTempUri() {
 		return Uri.fromFile(getTempFile());
