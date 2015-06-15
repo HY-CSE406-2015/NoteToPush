@@ -181,8 +181,8 @@ public class NoteList {
 	public int getNoteId(int index){
 		return note_id.get(index);
 	}
-	public ArrayList<Integer> getNote_Noti_Id(){
-		return note_noti_id;
+	public int getNote_Noti_Id(int index){
+		return note_noti_id.get(index);
 	}
 
 	public int getSize(){
@@ -190,6 +190,16 @@ public class NoteList {
 	}
 
 	public void deleteNote(int note_id){
-
+		mDB = mDBHelper.getWritableDatabase();
+		//id로 지워지는거 맞지?
+		String deleteNote = "delete from " + note +" where id = '"+ note_id +"'";
+		String deleteMemoNote = "delete from " + memo_note +" where id = '"+ note_id +"'";
+		String deleteImgNote = "delete from " + img_note +" where id = '"+ note_id +"'";
+		String deleteTodoNote = "delete from " + todo_note +" where id = '"+ note_id +"'";
+		
+		mDB.execSQL(deleteNote);
+		mDB.execSQL(deleteMemoNote);
+		mDB.execSQL(deleteImgNote);
+		mDB.execSQL(deleteTodoNote);
 	}
 }
