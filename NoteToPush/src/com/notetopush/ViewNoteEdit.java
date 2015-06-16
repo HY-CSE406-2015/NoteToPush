@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 
 public class ViewNoteEdit{
 
@@ -30,7 +33,7 @@ public class ViewNoteEdit{
 		setOnClick();
 	}
 
-	public View getview() {
+	public View getView() {
 		return view;
 	}
 
@@ -42,19 +45,30 @@ public class ViewNoteEdit{
 		EditText memo_title = (EditText) findViewById(R.id.memo_title);
 		memo_title.setText(title);
 		//date
-		
+
 		//content
 		EditText memo_content = (EditText) findViewById(R.id.memo_content);
 		memo_content.setText(text);
 	}
 
-	public void setToDo(String title, ArrayList<String> str_list, ArrayList<Boolean> able_list){
+	public void setToDo(String title, ArrayList<String> str_list){
 		EditText todo_title = (EditText) findViewById(R.id.todo_title);
 		todo_title.setText(title);
 
 		//date
 
 		//content
+		LinearLayout parent = (LinearLayout)sub_view.findViewById(R.id.todo_cont);
+		for(int todo_loop = 0; todo_loop<str_list.size(); todo_loop++){
+
+			EditText todo_text = new EditText(context);
+
+			todo_text.setText(str_list.get(todo_loop));
+			parent.addView(todo_text);
+
+		}
+
+
 	}
 
 	public void setImage(String title, Bitmap image){
@@ -64,7 +78,7 @@ public class ViewNoteEdit{
 		//date
 
 		//content
-		
+
 		ImageView i_view = (ImageView)sub_view.findViewById(R.id.img_content);
 		i_view.setImageBitmap(image);
 	}

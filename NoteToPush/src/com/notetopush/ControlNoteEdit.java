@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import android.R.bool;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -34,37 +35,70 @@ public class ControlNoteEdit extends Activity implements ViewNoteEdit.ViewListen
 	public static final String NOTE_ID = "com.notetopush.ControlNoteEdit.NOTE_ID";
 
 	private static int note_id = 0;
+	
+	private boolean is_created;
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
-		note_type = 0;
+		
+		note_type = 1;
 		
 		this.view = new ViewNoteEdit(this, note_type);
 		this.view.setListener(this);
-		setContentView(this.view.getview());
+		setContentView(this.view.getView());
 		setView();
 		getDateTime();
+		
+		is_created = false;
+	}
+	
+	protected void onResume(){
+		super.onResume();
+		if(is_created){
+			getNoteContent(this.note_id);
+			setView();
+			setContentView(this.view.getView());
+		}
+		is_created = true;
 	}
 
 	private void setView(){
 		String title = "더미 메모 노트";
-		String text = "더메 컨텐트";
+		//String text = "더 컨텐트";
+		
+		ToDoNote note = new ToDoNote(this);
+
+		ArrayList<String> contents = new ArrayList<String>();
+		ArrayList<Boolean> is_checks = new ArrayList<Boolean>();
+		for(int todo_loop = 0; todo_loop<note_id; todo_loop++){
+			Log.d("ToDo Insert",""+note_id);
+			contents.add("todtodotodo" + todo_loop);
+			is_checks.add((note_id%2 == 0)?true:false);
+		}
+		String note_title = "더미 ToDo 노트 "+note_id;
+		Long note_alarm = System.currentTimeMillis();
+		long note_write_time = System.currentTimeMillis();
+
+		note.setNote(note_title, note_alarm, note_write_time, contents, is_checks);
+		note.insertNote();
+		Log.d("Generate Note", "Type: ToDo, Title: "+note_title);
+		
 		int type = note_type;
 		
 		switch(type){
 		case Note.MEMO_TYPE:
-			//String text = ((MemoNote)this.note).getContent();
+			String text = ((MemoNote)this.note).getContent();
 			this.view.setMemo(title,text);
 			break;
 		case Note.TODO_TYPE:
-			ArrayList<String> str_list = ((ToDoNote)this.note).getContents();
-			ArrayList<Boolean> able_list = ((ToDoNote)this.note).getChecks();
+			ArrayList<String> str_list = (note).getContents();
+			ArrayList<Boolean> able_list = (note).getChecks();
 			Log.d("ToDo draw", "Number of elem is "+str_list.size());
-			this.view.setToDo(title, str_list, able_list);
+			this.view.setToDo(title, str_list);
 			break;
 		case Note.IMG_TYPE:
-			//ImageNote sub = ((ImageNote)this.note);
+			ImageNote sub = ((ImageNote)this.note);
 			Bitmap image = BitmapFactory.decodeResource(this.getResources(), R.drawable.test_big_img);
 			this.view.setImage(title, image);
 			break;
@@ -77,7 +111,7 @@ public class ControlNoteEdit extends Activity implements ViewNoteEdit.ViewListen
 		}
 	}
 
-	public void getNoteContent(){
+	public void getNoteContent(int note_id){
 		int type = note_type;
 		switch(type){
 		case Note.MEMO_TYPE:
@@ -96,8 +130,8 @@ public class ControlNoteEdit extends Activity implements ViewNoteEdit.ViewListen
 	}
 
 	public void confirmAction(){
-		getNoteContent();
-		//update();
+		getNoteContent(this.note_id);
+		//this.note.updateNote();
 	}
 
 	public long getDateTime(){
