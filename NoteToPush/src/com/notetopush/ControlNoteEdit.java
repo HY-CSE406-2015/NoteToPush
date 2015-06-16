@@ -29,6 +29,10 @@ public class ControlNoteEdit extends Activity {
     		
     		note.setNote(note_title, note_alarm, note_write_time, note_content);
     		note.insertNote();
+    		
+    		int noti_id = note.getId();
+    		ControlNotification.setMemoContent(this, noti_id, note_title, note_alarm, note_content);
+    		
     		Log.d("Generate Note", "Type: Memo, Title: "+note_title);
     		
         }else if(note_id%3 == 1){
@@ -47,6 +51,10 @@ public class ControlNoteEdit extends Activity {
     		
     		note.setNote(note_title, note_alarm, note_write_time, contents, is_checks);
     		note.insertNote();
+    		
+    		int noti_id = note.getId();
+    		ControlNotification.setToDoContent(this, noti_id, note_title, note_alarm, contents);
+    		
     		Log.d("Generate Note", "Type: ToDo, Title: "+note_title);
         }else{
         	ImageNote note = new ImageNote(this);
@@ -60,6 +68,10 @@ public class ControlNoteEdit extends Activity {
     		
     		note.setNote(note_title, note_alarm, note_write_time, img, content);
     		note.insertNote();
+    		
+    		int noti_id = note.getId();
+    		ControlNotification.setImgContent(this, noti_id, note_title, note_alarm, img, content);
+    		
     		Log.d("Generate Note", "Type: Image, Title: "+note_title);
         }
         

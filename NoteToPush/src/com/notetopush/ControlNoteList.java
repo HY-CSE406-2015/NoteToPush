@@ -62,6 +62,7 @@ public class ControlNoteList extends Activity implements ViewNoteList.ViewListen
 	public void deleteButtonAction(int note_id, int note_type, View note){
 		//삭제 확인 팝업 추가
 		note_list.deleteNote(note_id, note_type);
+		ControlNotification.deletePreviousNotification(note_id, this);
 		view.deleteNote(note);
 	}
 

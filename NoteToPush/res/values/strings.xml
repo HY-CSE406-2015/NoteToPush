@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	<string name="add">추가</string>
     <string name="app_name">NoteToPush</string>
     <string name="action_settings">설정</string>
     <string name="alarm">알람</string>
+    <string name="cancel">취소</string>
+    <string name="chose">선택</string>
+    <string name="confirm">등록</string>
+    <string name="content">내용</string>
     <string name="content_img_desc">이미지 노트의 내용입니다.</string>
     <string name="day">일</string>
     <string name="delete">삭제</string>
+    <string name="delete_notification">알림 지우기</string>
+    <string name="img">이미지</string>
+    <string name="memo">메모</string>
     <string name="modify">수정</string>
     <string name="month"></string>
-    <string name="notetopush">Note To Push</string>
+    <string name="notetopush">노트 투 푸쉬</string>
+    <string name="notification_summary">아래로 내려 지우기</string>
+    <string name="selectimg">이미지 선택</string>
     <string name="temp_text">임시 텍스트</string>
     <string name="time">:</string>
+    <string name="title">제목</string>
+    <string name="todo">할일</string>
+    <string name="todo_summary">개의 할일이 더 있습니다.</string>
     <string name="year">년</string>
-    
-
 </resources>

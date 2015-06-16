@@ -8,13 +8,13 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 
 public class ControlNoteContent extends Activity implements ViewNoteContent.ViewListener {
 	public static final String CONTROL_NOTE_ID = "com.notetopush.ControlNoteContent.CONTROL_NOTE_ID";
 	public static final String CONTROL_NOTE_TYPE = "com.notetopush.ControlNoteContent.CONTROL_NOTE_TYPE";
+	public static final String DELETE_NOTIFICATION = "com.notetopush.ControlNoteContent.DELETE_NOTIFICATION";
 	private ViewNoteContent view;
 	private Note note;
 	private int note_id;
@@ -25,6 +25,12 @@ public class ControlNoteContent extends Activity implements ViewNoteContent.View
 		super.onCreate(savedInstanceState);
 		this.note_id = getIntent().getIntExtra(CONTROL_NOTE_ID, -1);
 		this.note_type = getIntent().getIntExtra(CONTROL_NOTE_TYPE, -1);
+		int is_delete = getIntent().getIntExtra(DELETE_NOTIFICATION, -1);
+		if(is_delete == 1){
+			ControlNotification.deletePreviousNotification(this.note_id, this);
+			finish();
+		}
+		Log.d("NoteContent", "id: "+this.note_id+", Type: "+this.note_type);
 		getNoteContent(this.note_id);
 		this.view = new ViewNoteContent(this, this.note.getType());
 		this.view.setListener(this);
@@ -109,6 +115,7 @@ public class ControlNoteContent extends Activity implements ViewNoteContent.View
 	
 	public void deleteNoteAction() {
 		this.note.deleteNote();
+		ControlNotification.deletePreviousNotification(this.note_id, this);
 		finish();
 	}
 

@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-	<Button
+	<!-- <Button
 	    android:id="@+id/deletebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:gravity="center"
-        android:text="Delete" />
-
-	<TextView
-        android:layout_width="fill_parent"
+        android:text="Delete" /> -->
+        
+    <com.cengalabs.flatui.views.FlatButton
+        android:id="@+id/deletebtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/deletebtn"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:gravity="center"
-        android:id="@+id/notetitle"
-        android:textSize="35sp"/>
+        android:layout_marginRight="3dp"
+        android:text="@string/delete"
+        flatui:fl_blockButtonEffectHeight="3dp"
+        flatui:fl_theme="@array/candy" />
+
+	<com.cengalabs.flatui.views.FlatTextView
+	    android:id="@+id/notetitle"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_toLeftOf="@id/deletebtn"
+	    android:gravity="center_vertical"
+	    android:textColor="@android:color/black"
+	    android:textSize="20sp" />
 
 	<EditText
 	    android:id="@+id/note_type"

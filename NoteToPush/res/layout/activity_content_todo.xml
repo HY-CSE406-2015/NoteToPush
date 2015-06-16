@@ -24,7 +24,7 @@
         android:orientation="vertical"
         android:paddingTop="3dp" >
 
-        <TextView
+        <com.cengalabs.flatui.views.FlatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/alarm"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:gravity="center" >
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/act_alarm_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -54,7 +54,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/act_alarm_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-			<TextView
+			<com.cengalabs.flatui.views.FlatTextView
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="2dp"
@@ -72,7 +72,7 @@
 			    android:textAppearance="?android:attr/textAppearanceMedium"
 			    android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/act_alarm_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-			<TextView
+			<com.cengalabs.flatui.views.FlatTextView
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="2dp"
@@ -90,7 +90,7 @@
 			    android:textAppearance="?android:attr/textAppearanceMedium"
 			    android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/act_alarm_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-			<TextView
+			<com.cengalabs.flatui.views.FlatTextView
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="2dp"
@@ -109,7 +109,7 @@
 			    android:textAppearance="?android:attr/textAppearanceMedium"
 			    android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/act_alarm_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/act_alarm_apm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

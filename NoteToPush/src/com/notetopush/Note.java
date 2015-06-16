@@ -1,17 +1,12 @@
 package com.notetopush;
 
 
-import java.io.ByteArrayOutputStream;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,7 +24,7 @@ public class Note {
 	private static final String img_note = "IMG_NOTE";
 	public static final int dbVersion = 1;
 
-	public static SQLiteDatabase mDB;
+	public SQLiteDatabase mDB;
 	private MyOpenHelper helper;
 
 	protected int note_id = 1;

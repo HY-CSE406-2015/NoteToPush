@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="85" >
+
+	    <LinearLayout
+	        android:id="@+id/ll_title_layout"
+	        android:layout_width="fill_parent"
+	        android:layout_height="50dp"
+	        android:background="@drawable/shape_border_bottom" >
+	        
+	        <com.cengalabs.flatui.views.FlatButton
+	            android:id="@+id/btn_memo"
+	            android:layout_width="0dp"
+	            android:layout_height="40dp"
+	            android:layout_marginLeft="1dp"
+	            android:layout_marginRight="1dp"
+	            android:layout_marginTop="3dp"
+	            android:layout_weight="1"
+	            android:text="@string/memo"
+	            flatui:fl_blockButtonEffectHeight="3dp"
+	            flatui:fl_theme="@array/grass" />
+
+	        <com.cengalabs.flatui.views.FlatButton
+	            android:id="@+id/btn_todo"
+	            android:layout_width="0dp"
+	            android:layout_height="40dp"
+	            android:layout_marginLeft="1dp"
+	            android:layout_marginRight="1dp"
+	            android:layout_marginTop="3dp"
+	            android:layout_weight="1"
+	            android:text="@string/todo"
+	            flatui:fl_blockButtonEffectHeight="3dp"
+	            flatui:fl_theme="@array/grass" />
+	        <com.cengalabs.flatui.views.FlatButton
+	            android:id="@+id/btn_img"
+	            android:layout_width="0dp"
+	            android:layout_height="40dp"
+	            android:layout_marginLeft="1dp"
+	            android:layout_marginRight="1dp"
+	            android:layout_marginTop="3dp"
+	            android:layout_weight="1"
+	            android:text="@string/img"
+	            flatui:fl_blockButtonEffectHeight="3dp"
+	            flatui:fl_theme="@array/grass" />
+
+		    <!-- <Button
+		        android:id="@+id/btn_memo"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		    	android:layout_height="50dp"
+		    	android:text="@string/memo"
+		        />
+		    <Button
+		        android:id="@+id/btn_todo"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		    	android:layout_height="50dp"
+		    	android:text="@string/todo"
+		        />
+		    <Button
+		        android:id="@+id/btn_img"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		    	android:layout_height="50dp"
+		    	android:text="@string/img"
+		        /> -->
+		</LinearLayout>
+	    
+	    <android.support.v4.view.ViewPager
+	            android:id="@+id/pager"
+	            android:layout_width="fill_parent"
+	            android:layout_height="fill_parent"
+	           	android:layout_below="@+id/ll_title_layout"
+	             >
+	    </android.support.v4.view.ViewPager>
+   	</RelativeLayout>
+   	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:background="@drawable/shape_border_upper"
+        android:gravity="center" >
+
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            flatui:fl_blockButtonEffectHeight="3dp"
+            flatui:fl_theme="@array/candy" />
+
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="@string/confirm"
+            flatui:fl_blockButtonEffectHeight="3dp"
+            flatui:fl_theme="@array/sky" />
+    </LinearLayout>
+
+</LinearLayout>

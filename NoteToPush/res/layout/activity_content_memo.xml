@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:padding="2dp" >
 
-        <TextView
+        <com.cengalabs.flatui.views.FlatTextView
             android:id="@+id/acm_content_memo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,7 +31,7 @@
         android:orientation="vertical"
         android:paddingTop="3dp" >
 
-        <TextView
+        <com.cengalabs.flatui.views.FlatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/alarm"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="center" >
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/acm_alarm_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -61,7 +61,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/acm_alarm_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-			<TextView
+			<com.cengalabs.flatui.views.FlatTextView
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="2dp"
@@ -79,7 +79,7 @@
 			    android:textAppearance="?android:attr/textAppearanceMedium"
 			    android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/acm_alarm_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-			<TextView
+			<com.cengalabs.flatui.views.FlatTextView
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="2dp"
@@ -97,7 +97,7 @@
 			    android:textAppearance="?android:attr/textAppearanceMedium"
 			    android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/acm_alarm_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-			<TextView
+			<com.cengalabs.flatui.views.FlatTextView
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="2dp"
@@ -116,7 +116,7 @@
 			    android:textAppearance="?android:attr/textAppearanceMedium"
 			    android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/acm_alarm_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000" />
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:id="@+id/acm_alarm_apm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

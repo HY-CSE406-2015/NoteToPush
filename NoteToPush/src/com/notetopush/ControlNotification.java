@@ -1,8 +1,8 @@
 package com.notetopush;	
 
+import java.util.ArrayList;
+
 import android.app.Notification;
-import android.app.Notification.Builder;
-import android.app.Notification.InboxStyle;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,77 +12,114 @@ import android.util.Log;
 
 public class ControlNotification {
 
-	public interface control_noti{
-		public void setTitle(String title, long time,Context cnt);
-		public void setMemoContent(String text);
-		public void setToDoContent(String[] contents);
-		public void setImgContent(Bitmap img, String content);
-		public void settingNotification();
-		public void deletePreviousNotification(int noti_id);
-	}
-
-	private Builder notiBuilder;
-	private Notification noti;
-	private NotificationManager nm;
-
-	public void setTitle(String title, long time,Context cnt){
-        nm = (NotificationManager)cnt.getSystemService(Context.NOTIFICATION_SERVICE);
-        
-        Intent intent = new Intent(cnt, ControlNoteContent.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		PendingIntent content = PendingIntent.getActivity(cnt, 0, intent, 0);
-    
-		notiBuilder = new Notification.Builder(cnt);
+	private static Notification.Builder init(Context context, String title, long time){
+		Notification.Builder notiBuilder = new Notification.Builder(context);
 		notiBuilder.setTicker(title)
 		.setContentTitle(title)
-		.setWhen(time) 
-		.setSmallIcon(R.drawable.ic_launcher);
-		notiBuilder.setContentIntent(content);
+		//.setWhen(time)
+		.setWhen(System.currentTimeMillis())
+		.setSmallIcon(R.drawable.logo);
 		
-		
+		return notiBuilder;
 	}
 
-	public void setMemoContent(String text){
-		notiBuilder.setContentText(text);
-		noti = notiBuilder.build();
+	public static void setMemoContent(Context context, int id, String title, long time, String text){
+		NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+		Notification.Builder notiBuilder = init(context, title, time);
+		String noti_summary = context.getResources().getString(R.string.notification_summary);
+		notiBuilder.setContentText(noti_summary);
 		
-	}
+		Notification.BigTextStyle style = new Notification.BigTextStyle(notiBuilder);
+		style.setBigContentTitle(title);
+		style.bigText(text);
+		notiBuilder.setStyle(style);
+		
+		Intent intent = new Intent(context, ControlNoteContent.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtra(ControlNoteContent.CONTROL_NOTE_ID, id);
+		intent.putExtra(ControlNoteContent.CONTROL_NOTE_TYPE, Note.MEMO_TYPE);
+		PendingIntent pending = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		notiBuilder.setContentIntent(pending);
 
-	public void settingNotification(int noti_id){
+		intent.putExtra(ControlNoteContent.DELETE_NOTIFICATION, 1);
+		pending = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		String delete = context.getResources().getString(R.string.delete_notification);
+		notiBuilder.addAction(android.R.drawable.btn_dialog, delete, pending);
+		
+		Notification noti = notiBuilder.build();
 		noti.flags = Notification.FLAG_NO_CLEAR;
-		nm.notify(noti_id,noti);
+		manager.notify(id, noti);
 	}
 	
-	public void setToDoContent(String[] contents){
-//		InboxStyle ibs = new InboxStyle(notiBuilder);
-
-		Notification.InboxStyle ibs = new Notification.InboxStyle(notiBuilder);
-//		Log.i("noti","!!!");
-//		Log.i("noti",contents[0]);
-//		Log.i("noti",contents[1]);
-//		Log.i("noti",contents[2]);
-		Log.i("noti",""+contents.length);
-		for(int i = 0; i<contents.length; i++){
-			ibs.addLine(contents[i]);
-			Log.i("noti",contents[i]);
+	public static void setToDoContent(Context context, int id, String title, long time, ArrayList<String> contents){
+		NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+		Notification.Builder notiBuilder = init(context, title, time);
+		String noti_summary = context.getResources().getString(R.string.notification_summary);
+		notiBuilder.setContentText(noti_summary);
+		
+		Notification.InboxStyle style = new Notification.InboxStyle(notiBuilder);
+		style.setBigContentTitle(title);
+		int size = contents.size();
+		Log.i("noti",""+size);
+		for(int i = 0; i<((size>3)?3:size); i++){
+			style.addLine(contents.get(i));
+			Log.i("noti",contents.get(i));
 		}
-		noti = ibs.build();
+		if(size>3){
+			String sufix = context.getResources().getString(R.string.todo_summary);
+			style.setSummaryText("+"+(size-3)+sufix);
+		}
+		notiBuilder.setStyle(style);
+		
+		Intent intent = new Intent(context, ControlNoteContent.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtra(ControlNoteContent.CONTROL_NOTE_ID, id);
+		intent.putExtra(ControlNoteContent.CONTROL_NOTE_TYPE, Note.TODO_TYPE);
+		PendingIntent pending = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		notiBuilder.setContentIntent(pending);
+		
+		intent.putExtra(ControlNoteContent.DELETE_NOTIFICATION, 1);
+		pending = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		String delete = context.getResources().getString(R.string.delete_notification);
+		notiBuilder.addAction(android.R.drawable.btn_dialog, delete, pending);
+		
+		Notification noti = notiBuilder.build();
+		noti.flags = Notification.FLAG_NO_CLEAR;
+		manager.notify(id, noti);
 	}
 
-	public void setImgContent(Bitmap img, String content){
-		notiBuilder.setContentText(content);
-		noti = new Notification.BigPictureStyle(notiBuilder).bigPicture(img)
-				.setBigContentTitle("큰그림타이틀")
-				.setSummaryText("큰그림내용")
-				.build();
+	public static void setImgContent(Context context, int id, String title, long time, Bitmap img, String content){
+		NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+		Notification.Builder notiBuilder = init(context, title, time);
+		String noti_summary = context.getResources().getString(R.string.notification_summary);
+		notiBuilder.setContentText(noti_summary);
+		
+		Notification.BigPictureStyle style = new Notification.BigPictureStyle(notiBuilder);
+		style.setBigContentTitle(title);
+		style.setSummaryText(content);
+		style.bigPicture(img);
+		notiBuilder.setStyle(style);
+		
+		Intent intent = new Intent(context, ControlNoteContent.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtra(ControlNoteContent.CONTROL_NOTE_ID, id);
+		intent.putExtra(ControlNoteContent.CONTROL_NOTE_TYPE, Note.IMG_TYPE);
+		PendingIntent pending = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		notiBuilder.setContentIntent(pending);
+		
+		intent.putExtra(ControlNoteContent.DELETE_NOTIFICATION, 1);
+		pending = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		String delete = context.getResources().getString(R.string.delete_notification);
+		notiBuilder.addAction(android.R.drawable.btn_dialog, delete, pending);
+		
+		Notification noti = notiBuilder.build();
+		noti.flags = Notification.FLAG_NO_CLEAR;
+		manager.notify(id, noti);
 	}
-	//Delete noti
-	public void deletePreviousNotification(int noti_id,Context cnt){
-		nm = (NotificationManager)cnt.getSystemService(Context.NOTIFICATION_SERVICE);
+	
+	//Delete notification
+	public static void deletePreviousNotification(int noti_id,Context cnt){
+		NotificationManager nm = (NotificationManager)cnt.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(noti_id);
 	}
-	
-	
-
-	
 }
