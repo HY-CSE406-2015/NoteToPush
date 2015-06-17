@@ -213,6 +213,9 @@ public class ViewNoteEdit{
 		this.t_picker.setCurrentMinute(Integer.parseInt(date[4]));
 		frame.addView(this.sub_view);
 	}
+	public void deleteTypeFrame(){
+		findViewById(R.id.ace_type_layout).setVisibility(View.GONE);
+	}
 //	<EditText
 //    android:id="@+id/todo_cont_1"
 //    android:layout_width="match_parent"

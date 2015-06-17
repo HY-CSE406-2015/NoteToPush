@@ -127,7 +127,7 @@ public class ControlNoteEdit extends Activity implements ViewNoteEdit.ViewListen
 //        finish();
     }
     private void setView(){
-    	
+    	if(is_modify) this.view.deleteTypeFrame();
     }
     static public String[] getTime(Context context, long miltime){
     	String[] date = new String[5];

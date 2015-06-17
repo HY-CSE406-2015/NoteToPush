@@ -16,22 +16,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="100"
                 android:gravity="center"
                 android:text="@string/title"
-                android:textSize="10pt" />
+                android:textSize="10pt"
+                android:textColor="@android:color/black" />
 
             <EditText
                 android:id="@+id/ace_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="500"
-                android:ems="10"
-                android:text="input title" >
+                android:ems="10" >
 
                 <requestFocus />
             </EditText>
@@ -47,17 +47,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <TextView
+                <com.cengalabs.flatui.views.FlatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginLeft="1dp"
+                    android:textColor="@android:color/black"
                     android:text="@string/alarm"
                     android:textSize="11pt" />
 
-                <CheckBox
+                <com.cengalabs.flatui.views.FlatCheckBox
                     android:id="@+id/ace_set_alarm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,13 +76,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center" >
 
-                <Button
+                <com.cengalabs.flatui.views.FlatButton
                     android:id="@+id/ace_datepick_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="날짜" />
 
-                <Button
+                <com.cengalabs.flatui.views.FlatButton
                     android:id="@+id/ace_timepick_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,11 +115,12 @@
             android:layout_weight="600"
             android:orientation="vertical" >
 
-            <TextView
+            <com.cengalabs.flatui.views.FlatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="1dp"
                 android:text="@string/content"
+                android:textColor="@android:color/black"
                 android:textSize="11pt" />
 
             <ImageView
@@ -133,15 +135,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <TextView
+                <com.cengalabs.flatui.views.FlatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="3dp"
                     android:text="@string/selectimg"
+                    android:textColor="@android:color/black"
                     android:textSize="6pt" />
 
-                <Button
+                <com.cengalabs.flatui.views.FlatButton
                     android:id="@+id/ace_img_chose_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

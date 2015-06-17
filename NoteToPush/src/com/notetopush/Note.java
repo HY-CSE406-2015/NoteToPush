@@ -112,7 +112,7 @@ public class Note {
 		note.put("note_id", this.note_id);
 		note.put("type", this.note_type);
 		note.put("title", this.note_title);
-		note.put("alarm", this.note_alarm);
+		if(this.note_alarm != null) note.put("alarm", this.note_alarm);
 		note.put("write_time", this.note_write_time);
 		note.put("noti_id", this.note_id);
 		long debug_insert = mDB.insert("note", null, note);
