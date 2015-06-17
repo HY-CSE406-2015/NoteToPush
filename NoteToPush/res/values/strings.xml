@@ -4,6 +4,7 @@
     <string name="app_name">NoteToPush</string>
     <string name="action_settings">설정</string>
     <string name="alarm">알람</string>
+    <string name="alarm_setting">알람 설정</string>
     <string name="cancel">취소</string>
     <string name="chose">선택</string>
     <string name="confirm">등록</string>

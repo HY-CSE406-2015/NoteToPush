@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white" >
@@ -7,26 +8,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="130"
+            android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="100"
                 android:gravity="center"
                 android:text="@string/title"
                 android:textSize="10pt" />
 
             <EditText
-                android:id="@+id/img_title"
+                android:id="@+id/ace_title"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="500"
                 android:ems="10"
                 android:text="input title" >
@@ -38,33 +40,52 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="300"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:text="@string/alarm"
-                android:textSize="11pt" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:text="@string/alarm"
+                    android:textSize="11pt" />
+
+                <CheckBox
+                    android:id="@+id/ace_set_alarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/alarm_setting"
+                    android:textColor="@color/blood_dark" />
+
+            </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ace_picker_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center" >
 
                 <Button
-                    android:id="@+id/button1"
+                    android:id="@+id/ace_datepick_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button" />
+                    android:text="날짜" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/ace_timepick_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button" />
+                    android:text="시간" />
 
             </LinearLayout>
 
@@ -73,13 +94,13 @@
                 android:layout_height="wrap_content" >
 
                 <TimePicker
-                    android:id="@+id/timepicker"
+                    android:id="@+id/ace_timepicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
 
                 <DatePicker
-                    android:id="@+id/datepicker"
+                    android:id="@+id/ace_datepicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
@@ -100,47 +121,43 @@
                 android:text="@string/content"
                 android:textSize="11pt" />
 
+            <ImageView
+                android:id="@+id/ace_img_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffffff"
+                android:scaleType="centerInside" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="300" >
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="3dp"
+                    android:text="@string/selectimg"
+                    android:textSize="6pt" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/selectimg"
-                        android:textSize="6pt" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <Button
+                    android:id="@+id/ace_img_chose_btn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="700" >
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/chose"
+                    android:textSize="6pt" />
 
-                    <Button
-                        android:id="@+id/btn_chose"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/chose"
-                        android:textSize="6pt" />
-                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/ace_image_sub_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start"
+                android:lines="5" />
 
-                <ImageView
-                    android:id="@+id/img_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#ffffffff" />
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

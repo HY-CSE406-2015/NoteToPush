@@ -25,7 +25,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/content_note_content"
+        android:id="@+id/ace_note_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="75" >

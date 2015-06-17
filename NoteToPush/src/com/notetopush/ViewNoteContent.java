@@ -54,7 +54,7 @@ public class ViewNoteContent {
 		delete_btn.setOnClickListener(click_listener);
 		FlatButton modify_btn = (FlatButton)findViewById(R.id.content_note_modify);
 		modify_btn.setOnClickListener(click_listener);
-		FrameLayout content_frame = (FrameLayout)findViewById(R.id.content_note_content);
+		FrameLayout content_frame = (FrameLayout)findViewById(R.id.ace_note_content);
 		setContent(content_frame);
 	}
 	private void setContent(FrameLayout content_frame){

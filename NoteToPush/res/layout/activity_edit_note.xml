@@ -11,13 +11,13 @@
         android:layout_weight="85" >
 
 	    <LinearLayout
-	        android:id="@+id/ll_title_layout"
+	        android:id="@+id/ace_type_layout"
 	        android:layout_width="fill_parent"
 	        android:layout_height="50dp"
 	        android:background="@drawable/shape_border_bottom" >
 	        
 	        <com.cengalabs.flatui.views.FlatButton
-	            android:id="@+id/btn_memo"
+	            android:id="@+id/ace_type_memo_btn"
 	            android:layout_width="0dp"
 	            android:layout_height="40dp"
 	            android:layout_marginLeft="1dp"
@@ -29,7 +29,7 @@
 	            flatui:fl_theme="@array/grass" />
 
 	        <com.cengalabs.flatui.views.FlatButton
-	            android:id="@+id/btn_todo"
+	            android:id="@+id/ace_type_todo_btn"
 	            android:layout_width="0dp"
 	            android:layout_height="40dp"
 	            android:layout_marginLeft="1dp"
@@ -39,8 +39,8 @@
 	            android:text="@string/todo"
 	            flatui:fl_blockButtonEffectHeight="3dp"
 	            flatui:fl_theme="@array/grass" />
-	        <com.cengalabs.flatui.views.FlatButton
-	            android:id="@+id/btn_img"
+	        <com.cengalabs.flatui.views.FlatButton
+	            android:id="@+id/ace_type_img_btn"
 	            android:layout_width="0dp"
 	            android:layout_height="40dp"
 	            android:layout_marginLeft="1dp"
@@ -74,13 +74,20 @@
 		        /> -->
 		</LinearLayout>
 	    
-	    <android.support.v4.view.ViewPager
+	    <!-- <android.support.v4.view.ViewPager
 	            android:id="@+id/pager"
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent"
 	           	android:layout_below="@+id/ll_title_layout"
 	             >
-	    </android.support.v4.view.ViewPager>
+	    </android.support.v4.view.ViewPager> -->
+
+	    <FrameLayout
+	        android:id="@+id/ace_note_content"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_below="@+id/ace_type_layout" />
+
    	</RelativeLayout>
    	
     <LinearLayout
@@ -91,7 +98,7 @@
         android:gravity="center" >
 
         <com.cengalabs.flatui.views.FlatButton
-            android:id="@+id/btn_cancel"
+            android:id="@+id/ace_cancel_btn"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_margin="3dp"
@@ -101,7 +108,7 @@
             flatui:fl_theme="@array/candy" />
 
         <com.cengalabs.flatui.views.FlatButton
-            android:id="@+id/btn_confirm"
+            android:id="@+id/ace_confirm_btn"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_margin="3dp"
