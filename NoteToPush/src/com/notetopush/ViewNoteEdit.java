@@ -3,6 +3,7 @@ package com.notetopush;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -276,6 +277,17 @@ public class ViewNoteEdit{
 	}
 	public String getIamgeSubContent(){
 		return this.image_sub.getText().toString();
+	}
+	public ArrayList<String> getTodos(){
+		ArrayList<String> todos = new ArrayList<String>();
+		
+		int numbers = this.todos.getChildCount();
+		for(int loop=0; loop<numbers;loop++){
+			String strings = ((EditText)this.todos.getChildAt(loop)).getText().toString();
+			if(strings.length() != 0 & strings != null) todos.add(strings);
+		}
+		
+		return todos;
 	}
 
 	interface ViewListener{

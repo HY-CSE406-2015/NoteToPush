@@ -227,6 +227,10 @@ public class ControlNoteEdit extends Activity implements ViewNoteEdit.ViewListen
 			note_content = this.view.getMemoContent();
 			break;
 		case Note.TODO_TYPE:
+			todos = this.view.getTodos();
+			checks = new ArrayList<Boolean>();
+			for(int loop=0; loop<todos.size(); loop++)
+				checks.add(false);
 			break;
 		case Note.IMG_TYPE:
 			image_content = this.view.getImageContent();
@@ -270,12 +274,12 @@ public class ControlNoteEdit extends Activity implements ViewNoteEdit.ViewListen
     			break;
     		case Note.TODO_TYPE:
     			this.note = new ToDoNote(this);
-//    			((ToDoNote)this.note).setNote(title, alarm, write_time, contents, checks);
-//    			((ToDoNote)this.note).insertNote();
-//    			int todo_id = note.getId();
-//    			if(alarm == null) alarm = System.currentTimeMillis();
-//    			ControlNotification.setToDoContent(this, todo_id, title, alarm, contents);
-//    			this.note = new ToDoNote(this);
+    			((ToDoNote)this.note).setNote(title, alarm, write_time, todos, checks);
+    			((ToDoNote)this.note).insertNote();
+    			int todo_id = note.getId();
+    			if(alarm == null) alarm = System.currentTimeMillis();
+    			ControlNotification.setToDoContent(this, todo_id, title, alarm, todos);
+    			this.note = new ToDoNote(this);
     			break;
     		case Note.IMG_TYPE:
     			this.note = new ImageNote(this);
